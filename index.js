@@ -6,7 +6,7 @@ var litrator = require('./libs/index').use(datasource);
 var server = restify.createServer();
 server.use(plugins.bodyParser());
 
-server.get('/litrate/:statement', function (req, res, next) {
+server.get('/get/:id', function (req, res, next) {
     litrator.internalLitrate(req.params.statement, function (err, serviceResult) {
         if (err) {
             res.send({error: err.toString()})
@@ -16,15 +16,10 @@ server.get('/litrate/:statement', function (req, res, next) {
         next();
     });
 });
-server.post('/litrate', function (req, res, next) {
-    litrator.internalLitrate(req.body.statement, function (err, serviceResult) {
-        if (err) {
-            res.send({error: err.toString()})
-        } else {
-            res.send({query: req.body.statement, result: serviceResult})
-        }
-        next();
-    });
+
+
+server.post('/set', function (req, res, next) {
+    var value = req.body.document;
 });
 
 server.listen(config.port, function () {
