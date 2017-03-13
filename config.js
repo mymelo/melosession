@@ -3,7 +3,7 @@ module.exports = {
         master: {
             type: 'mongo',
             config: {
-                url: 'mongo://localhost:27017/database',
+                url: 'mongodb://localhost:27017/database',
                 collection: 'mycollection'
             }
         },
