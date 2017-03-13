@@ -1,20 +1,28 @@
-/*
-mongo style config
-{
-    type:'mongo',
-    url:'mongo://localhost:27017/database',
-    collection:'mycollection'
-}
-
-redis style config
-{
-    type:'redis',
-    host:'127.0.0.1',
-    port:6379,
-    database:0
-}
- */
-
-var init = function (master, temp, callback) {
-
+var _master, _old;
+module.exports = {
+    init: function (master, old, callback) {
+        _master = require('./plugins/' + master.type).init(master.config);
+        if (old) {
+            _old = require('./plugins/' + old.type).init(old.config);
+        }
+        return this;
+    },
+    get: function (key, callback) {
+        _master.get(key, function (err, res) {
+            if (err) {
+                callback(err);
+                return;
+            }
+            if (!res) {
+                if (_old) {
+                    _old.get(key, callback);
+                    return;
+                }
+            }
+            callback(err, res);
+        })
+    },
+    set: function (key, value, callback) {
+        _master.set(key, value, callback);
+    }
 };

@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/mymelo/melosession/issues"
   },
-  "homepage": "https://github.com/mymelo/melosession#readme"
+  "homepage": "https://github.com/mymelo/melosession#readme",
+  "dependencies": {
+    "mongodb": "^2.2.24",
+    "redis": "^2.7.0",
+    "restify": "^4.3.0",
+    "restify-plugins": "^1.5.1"
+  }
 }

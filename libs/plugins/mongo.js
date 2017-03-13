@@ -2,20 +2,36 @@ var MongoClient = require('mongodb').MongoClient;
 var sessionCollection;
 
 module.exports = {
-    init: function (options, callback) {
-        MongoClient.connect(options, function (err, db) {
+    init: function (config, callback) {
+        MongoClient.connect(config, function (err, db) {
             if (err) {
-                callback(err);
-            } else {
-                sessionCollection = db.collection(config.database.mongodb.state.collection);
+                callback && callback(err);
+                return;
             }
+            sessionCollection = db.collection(config.database.mongodb.state.collection);
         });
         return this;
     },
     get: function (id, callback) {
-
+        sessionCollection.findOne({_id: id}, function (err, docResult) {
+            if (err) {
+                callback && callback(err);
+                return;
+            }
+            if (docResult) {
+                callback && callback(null, {
+                    key: id,
+                    value: docResult
+                });
+            } else {
+                callback && callback(null, null);
+            }
+        });
     },
-    set: function (id, session, callback) {
-
+    set: function (id, value, callback) {
+        value._id = id;
+        sessionCollections.save(value, function (err, res) {
+            callback && callback(err, res);
+        });
     }
 };
