@@ -1,0 +1,24 @@
+{
+  "name": "melosession",
+  "version": "1.0.0",
+  "description": "Handle the sessions or other relatime read and write values",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mymelo/melosession.git"
+  },
+  "keywords": [
+    "redis",
+    "mongodb",
+    "session"
+  ],
+  "author": "mymelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mymelo/melosession/issues"
+  },
+  "homepage": "https://github.com/mymelo/melosession#readme"
+}
