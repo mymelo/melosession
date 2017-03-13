@@ -2,6 +2,7 @@
 
 ###Features
 * Read and write values by a key
+* Plugin support to compatible with any type of databases
 * Write any type of document such as json documents
 * Auto sync old and new database
  
@@ -57,5 +58,8 @@ session.get('/get/'+testKey,function(err,res) {
 })
 
 ```
+###plugins
+In this version, there are two plugins called mongo and redis, You can write your 
+plugin for your database with three methods as init, get and set.
 
 
