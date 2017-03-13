@@ -2,8 +2,8 @@
 
 ###Features
 * Read and write values by a key
-* Write any type of document such as json documents.
-* Auto sync old and new database.
+* Write any type of document such as json documents
+* Auto sync old and new database
  
  ###Use in Node.js
  ```
