@@ -9,17 +9,16 @@
  ```
 npm install melosession --save
 ```
-You can set or get values by a wrapper without depend on any technologies. we can use plugins for using any supported database.
-
-
 
 ####config styles
 * `mongo` config style
 ```javascript
 {
     type: 'mongo',
-    url: 'mongo://localhost:27017/database',
-    collection: 'mycollection'
+    config: {
+        url: 'mongodb://localhost:27017/database',
+        collection: 'mycollection'
+    }
 }
 ```
 
@@ -27,9 +26,36 @@ You can set or get values by a wrapper without depend on any technologies. we ca
 ```javascript
 {
     type:'redis',
-    host:'127.0.0.1',
-    port:6379,
-    database:0
+    config:{
+        host:'127.0.0.1',
+        port:6379,
+        database:0   
+    }
 }
 ```
-##Examples
+##Example
+At first, we must change config and set master and old session manager source and then run it as a rest service.</br>
+Next, we can call it as bellow:
+```javascript
+var restify = require('restify');
+var session = restify.createJsonClient({
+                 url: 'address-of-hosted-rest',
+                 version: '*'
+              });
+
+var testKey = 1234;
+var testValue = {name:'Ali', last_name: 'Alian'};
+
+/*Write*/
+session.post('/set',testValue,function(err,res) {
+  cosole.log(res); /*{ok: true}*/
+})
+
+/*Read*/
+session.get('/get/'+testKey,function(err,res) {
+  console.log(res); /*{key:1234, value :{name:'Ali', last_name: 'Alian'}}*/  
+})
+
+```
+
+

@@ -29,8 +29,11 @@ server.post('/pget', function (req, res, next) {
 
 server.post('/set', function (req, res, next) {
     session.set(req.body.key, req.body.value, function (err, sessionRes) {
+        sessionRes = sessionRes || {};
         if (err) {
             sessionRes.error = err.toString();
+        } else {
+            sessionRes.ok = true;
         }
         res.send(sessionRes);
         next();
