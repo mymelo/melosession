@@ -3,12 +3,12 @@ var sessionCollection;
 
 module.exports = {
     init: function (config, callback) {
-        MongoClient.connect(config, function (err, db) {
+        MongoClient.connect(config.url, function (err, db) {
             if (err) {
                 callback && callback(err);
                 return;
             }
-            sessionCollection = db.collection(config.database.mongodb.state.collection);
+            sessionCollection = db.collection(config.collection);
         });
         return this;
     },
